@@ -5,7 +5,7 @@ This project finds whether a person would buy a car or not, by analyzing a datas
 * Estimated Salary
 
 ## How to use?
-Fork the repository - run "SUV_analysis.py" and that's it
+Fork the repository - run "SUV_analysis.py" and that's it. However, if you want to see the Data Analysis part, run "SUV.ipynb" and you are good to go
 
 ## Packages used
 * For collection of data : pandas, and
