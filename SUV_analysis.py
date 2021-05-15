@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import StandardScaler
 import numpy as np
 
 #collection of data
@@ -37,6 +38,10 @@ y = data.loc[: ,"Purchased"]
 
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 42)
 
+# We are scaling the values of x_train and x_test so that the accuracy of our Classifiers
+x_train = StandardScaler().fit_transform(x_train)
+x_test = StandardScaler().fit_transform(x_test) # fit_transform() is not used because StandardScaler() has already been fitted
+
 clf_log = LogisticRegression()
 clf_log.fit(x_train, y_train)
 
@@ -61,7 +66,7 @@ if f1_score(y_test, y_pred_log) >= f1_score(y_test, y_pred_clf):
 
         print("The details of this person are as follows :\n\n", buffer.iloc[num, : ], sep = "")
 
-        if clf_log.predict([x_test.iloc[num, : ]]) == 1:
+        if clf_log.predict([x_test[num, : ]]) == 1:
             print("This person will purchase the car\n")
         else:
             print("This person will NOT purchase the car\n")
@@ -80,7 +85,7 @@ elif f1_score(y_test, y_pred_log) < f1_score(y_test, y_pred_clf):
 
         print("The details of this person are as follows :\n\n", buffer.iloc[num, :], sep = "")
 
-        if clf.predict([x_test.iloc[num, : ]]) == 1:
+        if clf.predict([x_test[num, : ]]) == 1:
             print("This person will purchase the car\n")
         else:
             print("This person will NOT purchase the car\n")
